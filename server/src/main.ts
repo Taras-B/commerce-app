@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 //mongodb+srv://tarasb:<password>@cluster0.d51o4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix('api');
   const options = new DocumentBuilder()
     .setTitle('commerce')

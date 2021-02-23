@@ -18,7 +18,8 @@ export class AuthService {
   ) {}
 
   async findById(id: string): Promise<UserDocument> {
-    const user = await this.userModel.findById(id).exec();
+    const user = await this.userModel.findById(id).select('-password').exec();
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -75,7 +76,7 @@ export class AuthService {
       };
       return {
         access_token: this.jwtService.sign({
-          id: user._id,
+          _id: user._id,
           username: user.username,
         }),
         ...result,

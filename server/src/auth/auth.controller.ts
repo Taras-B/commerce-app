@@ -1,16 +1,20 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { User } from 'src/decorators/user.decorator';
 import { AuthService } from './auth.service';
 import { LoginDTO, RegisterDTO } from './dto/auth.dto';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Get(':id')
-  async getUser(@Param('id') id: string) {
-    return this.authService.findById(id);
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  async getUser(@User('_id') _id: string) {
+    return this.authService.findById(_id);
   }
 
   @ApiResponse({
@@ -25,7 +29,10 @@ export class AuthController {
   async signUp(@Body() userDTO: RegisterDTO) {
     return this.authService.signUp(userDTO);
   }
-
+  @ApiResponse({
+    status: 200,
+    description: 'New tokens successfully created.',
+  })
   @Post('login')
   async login(@Body() userDTO: LoginDTO) {
     return this.authService.login(userDTO);
