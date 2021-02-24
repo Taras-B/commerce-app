@@ -23,6 +23,7 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+
     return user;
   }
 
@@ -47,6 +48,7 @@ export class AuthService {
     const token = this.jwtService.sign({
       id: newUser._id,
       username: newUser.username,
+      roles: newUser.role,
     });
     const result = {
       _id: newUser._id,
@@ -73,11 +75,13 @@ export class AuthService {
         username: user.username,
         email: user.email,
         create: user.create,
+        role: user.role,
       };
       return {
         access_token: this.jwtService.sign({
           _id: user._id,
           username: user.username,
+          roles: user.role,
         }),
         ...result,
       };

@@ -13,7 +13,8 @@ export class User {
 
   @Prop({ required: true })
   password: string;
-  @Prop()
+
+  @Prop({ default: 'user' })
   role: string;
 
   @Prop({ type: Date, default: Date.now })
