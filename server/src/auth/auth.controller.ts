@@ -1,7 +1,16 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/decorators/roles.decorators';
 import { User } from 'src/decorators/user.decorator';
+import { LoginValidationPipe } from 'src/pipes/login-validator.pipe';
+import { SignUpValidationPipe } from 'src/pipes/signup-validation.pipes';
 import { AuthService } from './auth.service';
 import { LoginDTO, RegisterDTO } from './dto/auth.dto';
 import { Role } from './enum/role.enum';
@@ -33,6 +42,7 @@ export class AuthController {
     status: 401,
     description: 'Unauthorized',
   })
+  @UsePipes(new SignUpValidationPipe())
   @Post('signup')
   async signUp(@Body() userDTO: RegisterDTO) {
     return this.authService.signUp(userDTO);
@@ -42,6 +52,7 @@ export class AuthController {
     status: 200,
     description: 'New tokens successfully created.',
   })
+  @UsePipes(new LoginValidationPipe())
   @Post('login')
   async login(@Body() userDTO: LoginDTO) {
     return this.authService.login(userDTO);
