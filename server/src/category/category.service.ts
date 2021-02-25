@@ -14,7 +14,7 @@ export class CategoryService {
     return categories;
   }
   async create(name: string): Promise<Category> {
-    const newCategory = await this.categoryModel.create(name);
+    const newCategory = await this.categoryModel.create({ name });
     const category = await newCategory.save();
     return category;
   }
