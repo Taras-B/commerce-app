@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Product } from 'src/product/models/product.schema';
+import { Product } from 'src/product/schemas/product.schema';
 import { ProductService } from './product.service';
 
 @ApiTags('products')
