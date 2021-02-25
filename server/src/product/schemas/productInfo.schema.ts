@@ -6,7 +6,7 @@ export type ProductInfoDocument = ProductInfo & Document;
 @Schema()
 export class ProductInfo {
   @Prop()
-  name: string;
+  title: string;
 
   @Prop()
   description: string;

@@ -27,7 +27,13 @@ export class Product {
   category: Category;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ProductInfo' }],
+    default: [],
+    validate: {
+      validator: function () {
+        return this.productInfo.length <= 10;
+      },
+      message: 'Array productInfo exceeds max size 10.',
+    },
   })
   productInfo: ProductInfo[];
 }
