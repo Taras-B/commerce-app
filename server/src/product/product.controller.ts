@@ -29,7 +29,7 @@ export class ProductController {
     description: 'Cast to ObjectId failed',
   })
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.productService.findById(id);
   }
 }
