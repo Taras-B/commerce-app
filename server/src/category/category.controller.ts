@@ -20,6 +20,7 @@ export class CategoryController {
   getAll() {
     return this.categoryService.findAll();
   }
+
   @ApiResponse({
     status: 201,
     description: 'Create  category',

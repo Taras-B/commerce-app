@@ -12,7 +12,7 @@ export class ProductService {
     private fileService: FileService,
   ) {}
 
-  async create(product: CreateProductDto, file) {
+  async create(product: CreateProductDto, file): Promise<Product> {
     const picturePath = this.fileService.createFile(file);
     const newProduct = await this.productModel.create({
       ...product,
@@ -23,8 +23,10 @@ export class ProductService {
   }
 
   async findAll(): Promise<Product[]> {
-    const product = await this.productModel.find();
-    return product;
+    const products = await this.productModel
+      .find()
+      .select(['-productInfo', '-description']);
+    return products;
   }
   async findById(id: string): Promise<Product> {
     const product = await this.productModel
