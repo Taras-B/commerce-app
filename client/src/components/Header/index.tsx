@@ -3,35 +3,31 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
+
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone'
-import AddToQueueTwoToneIcon from '@material-ui/icons/AddToQueueTwoTone'
-import PinDropTwoToneIcon from '@material-ui/icons/PinDropTwoTone'
-import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone'
 import SvgIcon from '@material-ui/core/SvgIcon'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import { lightGreen } from '@material-ui/core/colors'
+import { DrawerContent } from './DrawerContent'
 
-const drawerWidth = 240
-
-const useStyles = makeStyles((theme) => ({
+export const useStylesHeader = makeStyles((theme) => ({
   root: {
     display: 'flex',
     marginBottom: 100,
   },
 
   appBar: {
-    backgroundColor: theme.palette.grey[700],
+    backgroundColor: lightGreen[800],
     [theme.breakpoints.up('sm')]: {
       width: `100%`,
       backgroundColor: theme.palette.primary.dark,
@@ -39,14 +35,14 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    backgroundColor: theme.palette.grey[600],
+    backgroundColor: 'inherit',
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth,
+    width: 240,
     color: 'red',
   },
   content: {
@@ -54,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   sectionMobile: {
-    display: 'flex',
-    marginLeft: 30,
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
@@ -71,59 +65,13 @@ const useStyles = makeStyles((theme) => ({
 
 export function Header(props: any) {
   const { window } = props
-  const classes = useStyles()
+  const classes = useStylesHeader()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
-
-  const drawer = (
-    <div>
-      <div className={classes.toolbar}></div>
-      <Divider />
-      <List>
-        {[
-          {
-            id: 1,
-            title: 'Home',
-            icon: <AccountCircleTwoToneIcon />,
-            link: '/',
-          },
-          {
-            id: 2,
-            title: 'Episodes',
-            icon: <AddToQueueTwoToneIcon />,
-            link: 'episodes',
-          },
-          {
-            id: 3,
-            title: 'Locations',
-            icon: <PinDropTwoToneIcon />,
-            link: 'locations',
-          },
-          {
-            id: 4,
-            title: 'My watch list',
-            icon: <FavoriteTwoToneIcon />,
-            link: 'watch',
-          },
-        ].map((obj) => (
-          <Link
-            to={obj.link}
-            key={obj.id}
-            style={{ textDecoration: 'none', color: 'grey' }}>
-            <ListItem button key={obj.id}>
-              <ListItemIcon>{obj.icon}</ListItemIcon>
-              <ListItemText primary={obj.title} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-    </div>
-  )
-
   const container = window !== undefined ? () => window().document.body : undefined
 
   return (
@@ -146,28 +94,31 @@ export function Header(props: any) {
           <Typography className={classes.title} variant='h6'>
             E-Commerce
           </Typography>
-          <div className={classes.sectionMobile}>
-            <Typography variant='h5'>
-              <Link to='/' className={classes.linkDecoration}>
-                Characters
-              </Link>
-            </Typography>
-            <Typography variant='h5'>
-              <Link to='/episodes' className={classes.linkDecoration}>
-                Episodes
-              </Link>
-            </Typography>
-            <Typography variant='h5'>
-              <Link to='/locations' className={classes.linkDecoration}>
-                Locations
-              </Link>
-            </Typography>
-            <Typography variant='h5'>
-              <Link to='/watch-list' className={classes.linkDecoration}>
-                My Watch List
-              </Link>
-            </Typography>
-          </div>
+          <Grid
+            container
+            direction='row'
+            justify='space-between'
+            alignItems='center'
+            className={classes.sectionMobile}>
+            <Grid item container justify='flex-start' xs={7}>
+              <Box ml={2}>
+                <Typography variant='h5'>
+                  <Link to='/' className={classes.linkDecoration}>
+                    Home
+                  </Link>
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <Button component={Link} to='/login'>
+                Login
+              </Button>
+
+              <Button component={Link} to='/signup'>
+                SignUp
+              </Button>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
 
@@ -185,7 +136,7 @@ export function Header(props: any) {
             ModalProps={{
               keepMounted: true,
             }}>
-            {drawer}
+            <DrawerContent handleDrawerToggle={handleDrawerToggle} />
           </Drawer>
         </Hidden>
       </nav>
