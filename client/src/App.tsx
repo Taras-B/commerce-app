@@ -1,12 +1,26 @@
-import './App.css'
+import React from 'react'
+
+import Container from '@material-ui/core/Container'
+
 import { Header } from './components/Header'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
+import { Login } from './pages/Login'
 
 function App() {
   return (
-    <div className='App'>
+    <>
       <Header />
-      main
-    </div>
+      <Container maxWidth='md'>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
+          <Route path='/404' component={NotFound} />
+          <Redirect from='*' to='/404' />
+        </Switch>
+      </Container>
+    </>
   )
 }
 

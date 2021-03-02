@@ -1,4 +1,4 @@
-import { createMuiTheme, Theme as AugmentedTheme } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
 import { orange, teal } from '@material-ui/core/colors'
 
 declare module '@material-ui/core/styles/createMuiTheme' {
