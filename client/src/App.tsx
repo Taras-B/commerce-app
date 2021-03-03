@@ -7,6 +7,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { Login } from './pages/Login'
+import { SignUp } from './pages/SignUp'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={SignUp} />
           <Route path='/404' component={NotFound} />
           <Redirect from='*' to='/404' />
         </Switch>
