@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Formik, Form } from 'formik'
+import { Formik, Form, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -15,9 +15,16 @@ const loginSchema = yup.object({
     .required('Password is required'),
 })
 
-export const Login = () => {
-  console.log('LOGIn')
+interface ILoginForm {
+  email: string
+  password: string
+}
 
+export const Login = () => {
+  const onSubmitForm = (values: ILoginForm, actions: FormikHelpers<ILoginForm>) => {
+    console.log(values)
+    actions.resetForm()
+  }
   return (
     <Grid
       container
@@ -30,10 +37,8 @@ export const Login = () => {
           password: '',
         }}
         validationSchema={loginSchema}
-        onSubmit={(values) => {
-          console.log(values)
-        }}>
-        {({ errors, touched, handleChange }) => (
+        onSubmit={onSubmitForm}>
+        {({ errors, touched, handleChange, values }) => (
           <Grid item xs={12} md={6} sm={7}>
             <Form>
               <Grid container direction='column'>
@@ -43,8 +48,9 @@ export const Login = () => {
                   label='Email'
                   placeholder='commerce@mail.com'
                   type='email'
+                  value={values.email}
                   onChange={handleChange}
-                  error={Boolean(errors.email)}
+                  error={touched.email && Boolean(errors.email)}
                   helperText={touched.email && errors.email}
                   margin='normal'
                   variant='outlined'
@@ -56,7 +62,8 @@ export const Login = () => {
                   label='Password'
                   onChange={handleChange}
                   type='password'
-                  error={Boolean(errors.password)}
+                  value={values.password}
+                  error={touched.password && Boolean(errors.password)}
                   helperText={touched.password && errors.password}
                   margin='normal'
                   variant='outlined'
