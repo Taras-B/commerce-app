@@ -26,14 +26,15 @@ export enum EnumAuthType {
   SET_TOKEN = 'auth/SET_TOKEN',
   SET_LOGOUT = 'auth/SET_LOGOUT',
   CURRENT_AUTH = 'auth/CURRENT_AUTH',
+  FETCH_CURRENT_AUTH = 'auth/FETCH_CURRENT_AUTH',
   SET_LOADING = 'auth/SET_LOADING',
 }
 
-interface ILoginPayload {
+export interface ILoginPayload {
   email: string
   password: string
 }
-interface ISignUpPayload extends ILoginPayload {
+export interface ISignUpPayload extends ILoginPayload {
   username: string
 }
 //* API POST auth in user
@@ -63,6 +64,9 @@ export interface ISetLogoutAction extends Action<EnumAuthType> {
 export interface ICurrentAuthAction extends Action<EnumAuthType> {
   type: EnumAuthType.CURRENT_AUTH
   payload: IAuthUser
+}
+export interface IFetchCurrentAuthAction extends Action<EnumAuthType> {
+  type: EnumAuthType.FETCH_CURRENT_AUTH
 }
 
 export interface ISetAuthLoadingAction extends Action<EnumAuthType> {
