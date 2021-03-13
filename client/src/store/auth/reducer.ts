@@ -11,6 +11,8 @@ export const authReducer = (state = initialState, action: AuthActionType) => {
   switch (action.type) {
     case EnumAuthType.SET_TOKEN:
       return { ...state, token: action.payload }
+    case EnumAuthType.SET_LOGOUT:
+      return { ...state, token: null, isAuth: false, user: null }
 
     default:
       return state

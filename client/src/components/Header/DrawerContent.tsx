@@ -15,9 +15,15 @@ import { useStylesHeader } from './index'
 
 interface IPropsDrawerContent {
   handleDrawerToggle: () => void
+  isAuth: boolean
+  username: string | undefined
 }
 
-export const DrawerContent = ({ handleDrawerToggle }: IPropsDrawerContent) => {
+export const DrawerContent = ({
+  handleDrawerToggle,
+  isAuth,
+  username,
+}: IPropsDrawerContent) => {
   const { toolbar } = useStylesHeader()
   return (
     <div onClick={handleDrawerToggle}>
@@ -52,12 +58,19 @@ export const DrawerContent = ({ handleDrawerToggle }: IPropsDrawerContent) => {
       <Divider />
 
       <Grid container direction='column'>
-        <Button component={Link} to='/login' color='primary'>
-          Login
-        </Button>
-        <Button component={Link} to='/signup' color='primary'>
-          SignUp
-        </Button>
+        {isAuth ? (
+          <div>{username}</div>
+        ) : (
+          <>
+            <Button color='primary' component={Link} to='/login'>
+              Login
+            </Button>
+
+            <Button color='primary' component={Link} to='/signup'>
+              SignUp
+            </Button>
+          </>
+        )}
       </Grid>
     </div>
   )

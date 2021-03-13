@@ -19,6 +19,7 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import { lightGreen } from '@material-ui/core/colors'
 import { DrawerContent } from './DrawerContent'
+import { useTypedSelector } from '../../utils/typedSeletor'
 
 export const useStylesHeader = makeStyles((theme) => ({
   root: {
@@ -64,10 +65,13 @@ export const useStylesHeader = makeStyles((theme) => ({
 }))
 
 export function Header(props: any) {
+  const [mobileOpen, setMobileOpen] = React.useState(false)
   const { window } = props
   const classes = useStylesHeader()
   const theme = useTheme()
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+
+  const isAuth = useTypedSelector((state) => state.auth.isAuth)
+  const username = useTypedSelector((state) => state.auth.user?.username)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -109,14 +113,20 @@ export function Header(props: any) {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={4}>
-              <Button component={Link} to='/login'>
-                Login
-              </Button>
+            <Grid item container justify='flex-end' xs={4}>
+              {isAuth ? (
+                <div>{username}</div>
+              ) : (
+                <>
+                  <Button component={Link} to='/login'>
+                    Login
+                  </Button>
 
-              <Button component={Link} to='/signup'>
-                SignUp
-              </Button>
+                  <Button component={Link} to='/signup'>
+                    SignUp
+                  </Button>
+                </>
+              )}
             </Grid>
           </Grid>
         </Toolbar>
@@ -136,7 +146,11 @@ export function Header(props: any) {
             ModalProps={{
               keepMounted: true,
             }}>
-            <DrawerContent handleDrawerToggle={handleDrawerToggle} />
+            <DrawerContent
+              username={username}
+              isAuth={isAuth}
+              handleDrawerToggle={handleDrawerToggle}
+            />
           </Drawer>
         </Hidden>
       </nav>

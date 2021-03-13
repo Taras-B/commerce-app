@@ -9,7 +9,7 @@ export interface IAuthUser {
 export interface IAuthState {
   token: string | null
   isAuth: boolean
-  user?: IAuthUser | null
+  user: IAuthUser | null
   isLoading: LoadingAuthState
 }
 

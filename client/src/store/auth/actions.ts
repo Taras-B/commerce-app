@@ -31,4 +31,7 @@ export const authActions = {
     type: EnumAuthType.CURRENT_AUTH,
     payload,
   }),
+  setLogout: (): ISetLogoutAction => ({
+    type: EnumAuthType.SET_LOGOUT,
+  }),
 }
