@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { useDispatch } from 'react-redux'
+
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -19,7 +21,8 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import { lightGreen } from '@material-ui/core/colors'
 import { DrawerContent } from './DrawerContent'
-import { useTypedSelector } from '../../utils/typedSeletor'
+import { useTypedSelector } from '../../utils/typedSelector'
+import { authActions } from '../../store/auth/actions'
 
 export const useStylesHeader = makeStyles((theme) => ({
   root: {
@@ -69,12 +72,16 @@ export function Header(props: any) {
   const { window } = props
   const classes = useStylesHeader()
   const theme = useTheme()
+  const dispatch = useDispatch()
 
   const isAuth = useTypedSelector((state) => state.auth.isAuth)
   const username = useTypedSelector((state) => state.auth.user?.username)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+  const onLogout = () => {
+    dispatch(authActions.setLogout())
   }
   const container = window !== undefined ? () => window().document.body : undefined
 
@@ -115,7 +122,12 @@ export function Header(props: any) {
             </Grid>
             <Grid item container justify='flex-end' xs={4}>
               {isAuth ? (
-                <div>{username}</div>
+                <div>
+                  username{' '}
+                  <Button onClick={onLogout} component={Link} to='/login'>
+                    Logout
+                  </Button>
+                </div>
               ) : (
                 <>
                   <Button component={Link} to='/login'>
@@ -150,6 +162,7 @@ export function Header(props: any) {
               username={username}
               isAuth={isAuth}
               handleDrawerToggle={handleDrawerToggle}
+              onLogout={onLogout}
             />
           </Drawer>
         </Hidden>

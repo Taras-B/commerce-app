@@ -6,6 +6,7 @@ import {
   IFetchSignUpUserAction,
   ILoginPayload,
   ISetAuthAction,
+  ISetLogoutAction,
   ISetTokenAuthAction,
   ISignUpPayload,
 } from './types'

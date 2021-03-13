@@ -15,6 +15,7 @@ import { useStylesHeader } from './index'
 
 interface IPropsDrawerContent {
   handleDrawerToggle: () => void
+  onLogout: () => void
   isAuth: boolean
   username: string | undefined
 }
@@ -23,6 +24,7 @@ export const DrawerContent = ({
   handleDrawerToggle,
   isAuth,
   username,
+  onLogout,
 }: IPropsDrawerContent) => {
   const { toolbar } = useStylesHeader()
   return (
@@ -59,7 +61,12 @@ export const DrawerContent = ({
 
       <Grid container direction='column'>
         {isAuth ? (
-          <div>{username}</div>
+          <>
+            {username}{' '}
+            <Button onClick={onLogout} color='primary' component={Link} to='/login'>
+              Logout
+            </Button>
+          </>
         ) : (
           <>
             <Button color='primary' component={Link} to='/login'>
