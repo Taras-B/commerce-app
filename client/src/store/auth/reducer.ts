@@ -13,6 +13,8 @@ export const authReducer = (state = initialState, action: AuthActionType) => {
       return { ...state, token: action.payload }
     case EnumAuthType.SET_LOGOUT:
       return { ...state, token: null, isAuth: false, user: null }
+    case EnumAuthType.SET_AUTH:
+      return { ...state, isAuth: true, user: action.payload }
 
     default:
       return state

@@ -1,7 +1,7 @@
 import {
   EnumAuthType,
   IAuthUser,
-  ICurrentAuthAction,
+  IFetchCurrentUserAction,
   IFetchLoginUserAction,
   IFetchSignUpUserAction,
   ILoginPayload,
@@ -28,9 +28,8 @@ export const authActions = {
     type: EnumAuthType.SET_TOKEN,
     payload,
   }),
-  setCurrentUser: (payload: IAuthUser): ICurrentAuthAction => ({
-    type: EnumAuthType.CURRENT_AUTH,
-    payload,
+  fetchCurrentUser: (): IFetchCurrentUserAction => ({
+    type: EnumAuthType.FETCH_CURRENT_USER,
   }),
   setLogout: (): ISetLogoutAction => ({
     type: EnumAuthType.SET_LOGOUT,
