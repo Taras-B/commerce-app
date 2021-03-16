@@ -83,7 +83,7 @@ export class AuthService {
           username: user.username,
           roles: user.role,
         }),
-        ...result,
+        user: result,
       };
     } else {
       throw new ForbiddenException('Incorrect password');

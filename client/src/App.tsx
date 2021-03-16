@@ -8,8 +8,16 @@ import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
+import { useDispatch } from 'react-redux'
+import { authActions } from './store/auth/actions'
 
 function App() {
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(authActions.fetchCurrentUser())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       <Header />
