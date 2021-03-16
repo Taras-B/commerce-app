@@ -81,6 +81,7 @@ export function Header(props: any) {
     setMobileOpen(!mobileOpen)
   }
   const onLogout = () => {
+    localStorage.removeItem('token')
     dispatch(authActions.setLogout())
   }
   const container = window !== undefined ? () => window().document.body : undefined

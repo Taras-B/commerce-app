@@ -50,13 +50,14 @@ export class AuthService {
       username: newUser.username,
       roles: newUser.role,
     });
+
     const result = {
       _id: newUser._id,
       username: newUser.username,
       email: newUser.email,
       create: newUser.create,
     };
-    return { access_token: token, ...result };
+    return { access_token: token, user: result };
   }
 
   async login(userDTO: LoginDTO) {

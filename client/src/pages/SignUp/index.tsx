@@ -1,10 +1,12 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 import { Formik, Form, FormikHelpers } from 'formik'
 import * as yup from 'yup'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import { authActions } from '../../store/auth/actions'
 
 const signupSchema = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
@@ -23,8 +25,10 @@ interface ISignUpForm {
 }
 
 export const SignUp = () => {
+  const dispatch = useDispatch()
   const onSubmitForm = (values: ISignUpForm, actions: FormikHelpers<ISignUpForm>) => {
     console.log(values)
+    dispatch(authActions.fetchSignUp(values))
     actions.resetForm()
   }
   return (
