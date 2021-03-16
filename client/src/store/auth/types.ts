@@ -4,7 +4,7 @@ export enum Role {
   Admin = 'admin',
 }
 export interface IAuthUser {
-  _id: number
+  _id: string
   username: string
   email: string
   create: Date
