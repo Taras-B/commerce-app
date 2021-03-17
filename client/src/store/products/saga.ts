@@ -2,6 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import { AxiosResponse } from 'axios'
 import { productsAPI } from '../../api/products'
 import { EnumProductsType, IProductsItem } from './types'
+import { productsActions } from './actions'
 
 function* fetchProductsSaga() {
   try {
@@ -11,8 +12,7 @@ function* fetchProductsSaga() {
     console.log(data)
 
     if (status === 200) {
-      //   yield put(productsActions.setToken(data.access_token))
-      //   yield put(productsActions.setDataProducts(data.user))
+      yield put(productsActions.setData(data))
     }
   } catch (e) {
     //TODO: ADD error app

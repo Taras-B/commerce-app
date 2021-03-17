@@ -10,12 +10,14 @@ import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 import { useDispatch } from 'react-redux'
 import { authActions } from './store/auth/actions'
+import { productsActions } from './store/products/actions'
 
 function App() {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(authActions.fetchCurrentUser())
+    dispatch(productsActions.fetchProducts())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
