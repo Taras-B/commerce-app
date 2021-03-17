@@ -18,7 +18,7 @@ function* fetchAuthLoginSaga({ payload }: IFetchLoginUserAction) {
     )
 
     if (status === 201) {
-      window.localStorage.setItem('token', JSON.stringify(data.access_token))
+      window.localStorage.setItem('token', data.access_token)
       yield put(authActions.setToken(data.access_token))
       yield put(authActions.setDataAuth(data.user))
     }
@@ -37,7 +37,7 @@ function* fetchAuthSignUpSaga({ payload }: IFetchSignUpUserAction) {
     console.log(data)
 
     if (status === 201) {
-      window.localStorage.setItem('token', JSON.stringify(data.access_token))
+      window.localStorage.setItem('token', data.access_token)
       yield put(authActions.setToken(data.access_token))
 
       yield put(authActions.setDataAuth(data.user))
