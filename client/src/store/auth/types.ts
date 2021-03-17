@@ -1,4 +1,5 @@
 import { Action } from 'redux'
+
 export enum Role {
   User = 'user',
   Admin = 'admin',
@@ -30,7 +31,6 @@ export enum EnumAuthType {
   SET_AUTH = 'auth/SET_AUTH',
   SET_TOKEN = 'auth/SET_TOKEN',
   SET_LOGOUT = 'auth/SET_LOGOUT',
-  CURRENT_AUTH = 'auth/CURRENT_AUTH',
   FETCH_CURRENT_USER = 'auth/FETCH_CURRENT_USER',
   SET_LOADING = 'auth/SET_LOADING',
 }
@@ -66,10 +66,6 @@ export interface ISetLogoutAction extends Action<EnumAuthType> {
   type: EnumAuthType.SET_LOGOUT
 }
 
-export interface ICurrentAuthAction extends Action<EnumAuthType> {
-  type: EnumAuthType.CURRENT_AUTH
-  payload: IAuthUser
-}
 export interface IFetchCurrentUserAction extends Action<EnumAuthType> {
   type: EnumAuthType.FETCH_CURRENT_USER
 }
@@ -84,7 +80,6 @@ export type AuthActionType =
   | ISetLogoutAction
   | ISetAuthLoadingAction
   | ISetTokenAuthAction
-  | ICurrentAuthAction
   | IFetchLoginUserAction
   | IFetchSignUpUserAction
   | IFetchCurrentUserAction
