@@ -11,6 +11,7 @@ export interface ICategory {
 }
 
 export interface IProductsItem {
+  _id: string
   name: string
   price: number
   create: Date

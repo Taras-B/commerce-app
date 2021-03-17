@@ -17,7 +17,6 @@ function* fetchProductsSaga() {
   } catch (e) {
     //TODO: ADD error app
     console.log(e.response.data.message)
-    // yield put(setLoadingProducts(LoadingProductsState.ERROR))
   }
 }
 
