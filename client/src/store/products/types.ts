@@ -1,15 +1,5 @@
 import { Action } from 'redux'
 
-export interface IProductInfo {
-  title: string
-  description: string
-}
-
-export interface ICategory {
-  _id: string
-  name: string
-}
-
 export interface IProductsItem {
   _id: string
   name: string
@@ -17,15 +7,6 @@ export interface IProductsItem {
   create: Date
   picture: string
   category: string
-}
-export interface IProduct {
-  name: string
-  price: number
-  description: string
-  create: Date
-  picture: string
-  category: string | ICategory
-  productInfo: IProductInfo[]
 }
 
 export interface IProductsState {
