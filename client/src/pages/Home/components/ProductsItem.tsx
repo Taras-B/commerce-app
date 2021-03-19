@@ -15,13 +15,22 @@ import Fab from '@material-ui/core/Fab'
 import AddShoppingIcon from '@material-ui/icons/AddShoppingCart'
 
 interface IPropsItem {
+  id: string
   picture: string
   name: string
   price: number
   media: string
+  productInfo: (id: string) => void
 }
 
-export const ProductsItem = ({ picture, name, price, media }: IPropsItem) => {
+export const ProductsItem = ({
+  id,
+  picture,
+  name,
+  price,
+  media,
+  productInfo,
+}: IPropsItem) => {
   return (
     <Grid item xs={12} md={4} sm={6}>
       <Card>
@@ -63,8 +72,12 @@ export const ProductsItem = ({ picture, name, price, media }: IPropsItem) => {
         </CardContent>
         <CardActions>
           <Grid container justify='space-between'>
-            <Button size='small' color='primary' variant='outlined'>
-              Open
+            <Button
+              size='small'
+              color='primary'
+              variant='outlined'
+              onClick={() => productInfo(id)}>
+              Info
             </Button>
             <Fab
               size='small'

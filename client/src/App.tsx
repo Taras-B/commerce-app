@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container'
 import { Header } from './components/Header'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Home } from './pages/Home'
+import { ProductInfo } from './pages/ProductInfo'
 import { NotFound } from './pages/NotFound'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
@@ -26,6 +27,7 @@ function App() {
       <Container maxWidth='md'>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/products/:id' component={ProductInfo} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={SignUp} />
           <Route path='/404' component={NotFound} />

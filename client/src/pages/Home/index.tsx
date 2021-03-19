@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { useTypedSelector } from '../../utils/typedSelector'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,14 @@ const useStyles = makeStyles({
 
 export const Home = () => {
   const classes = useStyles()
+
+  const history = useHistory()
   const { products, isProducts } = useTypedSelector((state) => state.products)
+
+  const onClickToInfoProduct = (id: string) => {
+    history.push(`products/${id}`)
+  }
+
   if (!isProducts) {
     return <div>NO Products</div>
   }
@@ -51,6 +59,8 @@ export const Home = () => {
             price={el.price}
             picture={el.picture}
             media={classes.media}
+            productInfo={onClickToInfoProduct}
+            id={el._id}
             key={el._id}
           />
         ))}
