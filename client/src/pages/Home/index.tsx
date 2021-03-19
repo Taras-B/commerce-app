@@ -13,6 +13,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Divider from '@material-ui/core/Divider'
 import Tooltip from '@material-ui/core/Tooltip'
+import Fab from '@material-ui/core/Fab'
+import AddShoppingIcon from '@material-ui/icons/AddShoppingCart'
 
 import { useTypedSelector } from '../../utils/typedSelector'
 const useStyles = makeStyles({
@@ -88,9 +90,18 @@ export const Home = () => {
                 </Grid>
               </CardContent>
               <CardActions>
-                <Button size='small' color='primary'>
-                  Open information
-                </Button>
+                <Grid container justify='space-between'>
+                  <Button size='small' color='primary' variant='outlined'>
+                    Open
+                  </Button>
+                  <Fab
+                    size='small'
+                    onClick={() => console.log('but')}
+                    color='secondary'
+                    aria-label='add to shopping cart'>
+                    <AddShoppingIcon />
+                  </Fab>
+                </Grid>
               </CardActions>
             </Card>
           </Grid>
